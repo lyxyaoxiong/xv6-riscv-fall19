@@ -5,12 +5,10 @@
 int
 main(int argc, char **argv)
 {
-  int i;
-
-  if(argc < 2 && argc > 3){
+  if(argc < 2 || argc > 3){
     fprintf(2, "usage: sleep time...\n");
     exit();
   }
-  sleep(atoi(argv[2]));
+  sleep(atoi(argv[1]));
   exit();
 }
