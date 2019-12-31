@@ -32,7 +32,7 @@ main(int argc, char **argv)
     printf("child process received %c", buf[0]);
     sleep(30);
     printf("child process writing one byte to parent process...");
-    write(fds[1], buf[0], n);
+    write(fds[1], buf, n);
   }
 
   exit();
