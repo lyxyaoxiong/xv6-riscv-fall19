@@ -18,20 +18,20 @@ main(int argc, char **argv)
   if (fork() != 0)
   {
     char byte_sent[] = {"0"};
-    printf("parent process writing one byte to child process...");
+    printf("parent process writing one byte to child process...\n");
     write(fds[1], byte_sent, n);
     sleep(30);
-    printf("parent process waiting for response...");
+    printf("parent process waiting for response...\n");
     if (n != read(fds[0], buf, n))
-      fprintf(2, "error when parent process is waiting for response...");
+      fprintf(2, "error when parent process is waiting for response...\n");
     printf("parent process received %c, expected %c", buf[0], byte_sent[0]);
   } else
   {
     if (n != read(fds[0], buf, n))
-      fprintf(2, "error when child process is waiting for response...");
-    printf("child process received %c", buf[0]);
+      fprintf(2, "error when child process is waiting for response...\n");
+    printf("child process received %c\n", buf[0]);
     sleep(30);
-    printf("child process writing one byte to parent process...");
+    printf("child process writing one byte to parent process...\n");
     write(fds[1], buf, n);
   }
 

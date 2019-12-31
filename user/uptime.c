@@ -9,6 +9,6 @@ main(int argc, char **argv)
     fprintf(2, "usage: uptime...\n");
     exit();
   }
-  printf("%d", uptime());
+  printf("%d\n", uptime());
   exit();
 }
