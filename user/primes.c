@@ -25,9 +25,9 @@ main(int argc, char **argv)
     write(fds[1], buf, n);
     // if (read(fds_i[0], buf, 1) == 0)
     //   printf("error when waiting for pipe closure\n");
-    read(fds_i[0], buf, 1);
-    printf("parent received: %d\n", buf[0]);
-    if (read(fds_i[0], buf, 1) == 0)
+    // read(fds_i[0], buf, 1);
+    // printf("parent received: %d\n", buf[0]);
+    if (read(fds_i[0], buf, 0) == 0)
       printf("error when waiting for pipe closure\n");
 
     printf("parent closing fd\n");
@@ -39,8 +39,8 @@ main(int argc, char **argv)
     sleep(30);
     findPrime(fds[0]);
     printf("child closing fd\n");
-    int tmpBuf[] = {0};
-    write(fds_i[1], tmpBuf, 0);
+    // int tmpBuf[] = {0};
+    // write(fds_i[1], tmpBuf, 0);
     close(fds_i[1]);
     printf("child closing middle\n");
     close(fds[0]);
