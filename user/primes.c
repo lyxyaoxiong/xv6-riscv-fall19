@@ -35,7 +35,7 @@ int findPrime(int r_fd){
   int buf[1];
   if (read(r_fd, buf, 1) != 1)
     return 0;
-  printf(buf[0]);
+  printf("%d", buf[0]);
   // int prime = buf[0];
   // printf("prime %d", prime);
   // int fds[2];
