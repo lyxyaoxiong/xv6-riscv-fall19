@@ -25,14 +25,19 @@ main(int argc, char **argv)
     write(fds[1], buf, n);
     if (read(fds_i[0], buf, 1) == 0)
       printf("error when waiting for pipe closure\n");
+    printf("parent closing fd\n");
     close(fds_i[0]);
+    printf("parent closing middle\n");
     close(fds[1]);
-    printf("finished.\n");
+    printf("parent finished.\n");
   } else{
     sleep(30);
     findPrime(fds[0]);
+    printf("child closing fd\n");
     close(fds_i[1]);
+    printf("child closing middle\n");
     close(fds[0]);
+    printf("child finished.\n");
   }
 
   exit();
