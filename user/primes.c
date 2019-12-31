@@ -12,23 +12,27 @@ main(int argc, char **argv)
     exit();
   }
   int fds[2];
+  int fds_i[2];
   pipe(fds);
+  pipe(fds_i);
   int pid = fork();
   if (pid != 0){
     int n = 35 - 2;
     int buf[n];
-    for(int i = 2 ; i <= 35; i++){
+    for(int i = 2; i <= 35; i++){
       buf[i-2] = i;
     }
     write(fds[1], buf, n);
-    if (read(fds[0], buf, 1) == 0)
+    if (read(fds_i[0], buf, 1) == 0)
       printf("error when waiting for pipe closure\n");
-    close(fds[0]);
+    close(fds_i[0]);
+    close(fds[1]);
     printf("finished.\n");
   } else{
     sleep(30);
     findPrime(fds[0]);
-    close(fds[1]);
+    close(fds_i[1]);
+    close(fds[0]);
   }
 
   exit();
