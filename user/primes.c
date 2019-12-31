@@ -21,12 +21,14 @@ main(int argc, char **argv)
       buf[i-2] = i;
     }
     write(fds[1], buf, n);
-    sleep(100);
-    close(fds[1]);
+    if (read(fds[0], buf, 1) == 0)
+      printf("error when waiting for pipe closure\n");
+    close(fds[0]);
+    printf("finished.\n");
   } else{
     sleep(30);
     findPrime(fds[0]);
-    close(fds[0]);
+    close(fds[1]);
   }
 
   exit();
@@ -36,7 +38,7 @@ int findPrime(int r_fd){
   int buf[1];
   if (read(r_fd, buf, 1) != 1)
     return 0;
-  printf("%d", buf[0]);
+  printf("%d\n", buf[0]);
   return 0;
   // int prime = buf[0];
   // printf("prime %d", prime);
