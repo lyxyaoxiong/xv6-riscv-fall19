@@ -29,7 +29,7 @@ main(int argc, char **argv)
     printf("parent received: %d", buf[0]);
     if (read(fds_i[0], buf, 1) == 0)
       printf("error when waiting for pipe closure\n");
-      
+
     printf("parent closing fd\n");
     close(fds_i[0]);
     printf("parent closing middle\n");
@@ -39,7 +39,8 @@ main(int argc, char **argv)
     sleep(30);
     findPrime(fds[0]);
     printf("child closing fd\n");
-    write(fds_i[1], "\n", 1);
+    int tmpBuf[] = {0};
+    write(fds_i[1], tmpBuf, sizeof(tmpBuf));
     close(fds_i[1]);
     printf("child closing middle\n");
     close(fds[0]);
