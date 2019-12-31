@@ -24,7 +24,7 @@ main(int argc, char **argv)
     printf("parent process waiting for response...\n");
     if (n != read(fds[0], buf, n))
       fprintf(2, "error when parent process is waiting for response...\n");
-    printf("parent process received %c, expected %c", buf[0], byte_sent[0]);
+    printf("parent process received %c, expected %c\n", buf[0], byte_sent[0]);
   } else
   {
     if (n != read(fds[0], buf, n))
@@ -32,6 +32,7 @@ main(int argc, char **argv)
     printf("child process received %c\n", buf[0]);
     sleep(30);
     printf("child process writing one byte to parent process...\n");
+    sleep(10);
     write(fds[1], buf, n);
   }
 

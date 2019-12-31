@@ -21,6 +21,7 @@ main(int argc, char **argv)
       buf[i-2] = i;
     }
     write(fds[1], buf, n);
+    sleep(100);
     close(fds[1]);
   } else{
     sleep(30);
