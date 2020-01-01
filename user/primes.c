@@ -57,7 +57,7 @@ void closePipe(int *p_fds, int p_pid){
     write(p_fds[1], buf, 1);
     close(p_fds[1]);
   } else {
-    while (read(p_fds[0], buf, 1)) {
+    while (read(p_fds[0], buf, 0)) {
       printf("when parent is closing, read: %c", buf[0]);
     }; 
     close(p_fds[0]);
