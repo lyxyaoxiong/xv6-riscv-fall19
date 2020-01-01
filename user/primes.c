@@ -3,6 +3,7 @@
 #include "user/user.h"
 
 int findPrime(int r_fd);
+void closePipe(int[],int);
 
 int
 main(int argc, char **argv)
@@ -27,11 +28,11 @@ main(int argc, char **argv)
     //   printf("error when waiting for pipe closure\n");
     // read(fds_i[0], buf, 1);
     // printf("parent received: %d\n", buf[0]);
-    if (read(fds_i[0], buf, 0) == 0)
-      printf("error when waiting for pipe closure\n");
+    // if (read(fds_i[0], buf, 0) == 0)
+    //   printf("error when waiting for pipe closure\n");
 
     printf("parent closing fd\n");
-    close(fds_i[0]);
+    closePipe(fds_i, pid);
     printf("parent closing middle\n");
     close(fds[1]);
     printf("parent finished.\n");
@@ -41,13 +42,24 @@ main(int argc, char **argv)
     printf("child closing fd\n");
     // int tmpBuf[] = {0};
     // write(fds_i[1], tmpBuf, 0);
-    close(fds_i[1]);
+    closePipe(fds_i, pid);
     printf("child closing middle\n");
     close(fds[0]);
     printf("child finished.\n");
   }
 
   exit();
+}
+
+void closePipe(int *p_fds, int p_pid){
+  char buf[1];
+  if (p_pid == 0) {
+    write(p_fds[1], buf, 1);
+    close(p_fds[1]);
+  } else {
+    while (read(p_fds[0], buf, 1)); 
+    close(p_fds[0]);
+  }
 }
 
 int findPrime(int r_fd){
