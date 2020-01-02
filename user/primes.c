@@ -71,6 +71,7 @@ int findPrime(int r_fd){
     int n = read(r_fd, buf, 1);
     printf("chile received %d int: %d\n", n, buf[0]);
   }
+  printf("chiled finished receiving.");
   // if (read(r_fd, buf, 1) != 1)
   //   return 0;
   // printf("chile received 1 char: %d\n", buf[0]);
