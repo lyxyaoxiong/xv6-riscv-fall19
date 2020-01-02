@@ -23,7 +23,7 @@ main(int argc, char **argv)
     for(int i = 2; i <= 35; i++){
       buf[i-2] = i;
     }
-    write(fds[1], buf, n);
+    write(fds[1], buf, sizeof(buf));
     // if (read(fds_i[0], buf, 1) == 0)
     //   printf("error when waiting for pipe closure\n");
     // read(fds_i[0], buf, 1);
@@ -69,7 +69,10 @@ int findPrime(int r_fd){
   int buf[1];
   while (1) {
     sleep(20);
-    int n = read(r_fd, buf, 1);
+    int n = read(r_fd, buf, sizeof(int));
+    if (n <= 0) {
+      break;
+    }
     printf("chile received %d int: %d\n", n, buf[0]);
   }
   printf("chiled finished receiving.");
