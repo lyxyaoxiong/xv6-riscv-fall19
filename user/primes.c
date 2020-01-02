@@ -18,13 +18,11 @@ main(int argc, char **argv)
   pipe(fds_i);
   int pid = fork();
   if (pid != 0){
-    int n = 35 - 2;
-    int buf[n];
+    int buf[1];
     for(int i = 2; i <= 35; i++){
-      buf[i-2] = i;
+      buf[0] = i;
     }
-    printf("parent sent size: %d", sizeof(buf));
-    write(fds[1], buf, sizeof(buf));
+    write(fds[1], buf, sizeof(int));
     // if (read(fds_i[0], buf, 1) == 0)
     //   printf("error when waiting for pipe closure\n");
     // read(fds_i[0], buf, 1);
