@@ -68,7 +68,6 @@ void closePipe(int *p_fds, int p_pid){
 int findPrime(int r_fd){
   int buf[1];
   while (1) {
-    sleep(20);
     int n = read(r_fd, buf, sizeof(int));
     if (n <= 0) {
       break;
