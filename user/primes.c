@@ -23,6 +23,7 @@ main(int argc, char **argv)
     for(int i = 2; i <= 35; i++){
       buf[i-2] = i;
     }
+    printf("parent sent size: %d", sizeof(buf));
     write(fds[1], buf, sizeof(buf));
     // if (read(fds_i[0], buf, 1) == 0)
     //   printf("error when waiting for pipe closure\n");
@@ -34,7 +35,7 @@ main(int argc, char **argv)
     printf("parent closing fd\n");
     // closePipe(fds_i, pid);
     printf("parent closing middle\n");
-    close(fds[1]);
+    // close(fds[1]);
     // close(fds[0]);
     printf("parent finished.\n");
   } else{
