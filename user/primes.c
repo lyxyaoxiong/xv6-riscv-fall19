@@ -19,7 +19,7 @@ main(int argc, char **argv)
   int pid = fork();
   if (pid != 0){
     int buf[1];
-    for(int i = 2; i <= 35; i++){
+    for(int i = 2; i <= 2; i++){
       buf[0] = i;
     }
     write(fds[1], buf, sizeof(int));
@@ -30,6 +30,7 @@ main(int argc, char **argv)
     // if (read(fds_i[0], buf, 0) == 0)
     //   printf("error when waiting for pipe closure\n");
 
+    sleep(50);
     printf("parent closing fd\n");
     // closePipe(fds_i, pid);
     printf("parent closing middle\n");
@@ -37,7 +38,7 @@ main(int argc, char **argv)
     // close(fds[0]);
     printf("parent finished.\n");
   } else{
-    sleep(30);
+    // sleep(30);
     findPrime(fds[0]);
     printf("child closing fd\n");
     // int tmpBuf[] = {0};
