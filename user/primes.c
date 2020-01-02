@@ -34,7 +34,7 @@ main(int argc, char **argv)
     printf("parent closing fd\n");
     // closePipe(fds_i, pid);
     printf("parent closing middle\n");
-    // close(fds[1]);
+    close(fds[1]);
     // close(fds[0]);
     printf("parent finished.\n");
   } else{
