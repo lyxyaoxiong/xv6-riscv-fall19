@@ -32,9 +32,10 @@ main(int argc, char **argv)
     //   printf("error when waiting for pipe closure\n");
 
     printf("parent closing fd\n");
-    closePipe(fds_i, pid);
+    // closePipe(fds_i, pid);
     printf("parent closing middle\n");
     close(fds[1]);
+    close(fds[0]);
     printf("parent finished.\n");
   } else{
     sleep(30);
@@ -42,9 +43,9 @@ main(int argc, char **argv)
     printf("child closing fd\n");
     // int tmpBuf[] = {0};
     // write(fds_i[1], tmpBuf, 0);
-    closePipe(fds_i, pid);
+    // closePipe(fds_i, pid);
     printf("child closing middle\n");
-    close(fds[0]);
+    // close(fds[0]);
     printf("child finished.\n");
   }
 
@@ -66,9 +67,13 @@ void closePipe(int *p_fds, int p_pid){
 
 int findPrime(int r_fd){
   int buf[1];
-  if (read(r_fd, buf, 1) != 1)
-    return 0;
-  printf("%d\n", buf[0]);
+  while (1) {
+    int n = read(r_fd, buf, 1);
+    printf("chile received %d int: %d\n", n, buf[0]);
+  }
+  // if (read(r_fd, buf, 1) != 1)
+  //   return 0;
+  // printf("chile received 1 char: %d\n", buf[0]);
   return 0;
   // int prime = buf[0];
   // printf("prime %d", prime);
