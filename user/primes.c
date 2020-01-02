@@ -70,6 +70,7 @@ int findPrime(int r_fd){
   while (1) {
     int n = read(r_fd, buf, sizeof(int));
     if (n <= 0) {
+      printf("chiled received nothing.");
       break;
     }
     printf("chile received %d int: %d\n", n, buf[0]);
